@@ -1,0 +1,154 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+</head>
+
+<body>
+    <section class="contact spad">        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__text">
+                        <div class="section-title">
+                            <h2>Edit Product</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12" >
+                    <div class="contact__form">
+                        {% if msg %}
+                        <b style="color: blue;">{{msg}}</b>
+                        {% endif %}
+                        <form action="{% url 'seller-product-edit' pk=product.pk %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <select name="product_category" class="form-control">
+                                    {% if product.product_category == "Round" %}
+                                    <option>-----Select Category-----</option>
+                                      <option value="Round" selected>Round</option>
+                                      <option value="Polo">Polo</option>
+                                      <option value="Full Sleeve">Full Sleeve</option>
+                                      <option value="Sports">Sports</option>
+                                    {% elif product.product_category == "Polo" %}
+                                    <option>-----Select Category-----</option>
+                                      <option value="Round">Round</option>
+                                      <option value="Polo" selected>Polo</option>
+                                      <option value="Full Sleeve">Full Sleeve</option>
+                                      <option value="Sports">Sports</option>
+                                    {% elif product.product_category == "Full Sleeve" %}
+                                    <option>-----Select Category-----</option>
+                                      <option value="Round">Round</option>
+                                      <option value="Polo">Polo</option>
+                                      <option value="Full Sleeve" selected>Full Sleeve</option>
+                                      <option value="Sports">Sports</option>
+                                    {% elif product.product_category == "Sports" %}
+                                    <option>-----Select Category-----</option>
+                                      <option value="Round">Round</option>
+                                      <option value="Polo">Polo</option>
+                                      <option value="Full Sleeve">Full Sleeve</option>
+                                      <option value="Sports" selected>Sports</option>
+                                    {% endif %}
+
+                                    </select>
+                                </div>
+                                <br><br><br>
+                                <div class="col-lg-12">
+                                    <select name="product_brand" class="form-control">
+                                    {% if product.product_brand == "Superdry" %}
+                                    <option>-----Select Brand-----</option>
+                                    <option value="Superdry" selected>Superdry</option>
+                                    <option value="Allen Solly">Allen Solly</option>
+                                    <option value="Netplay">Netplay</option>
+                                    <option value="Performax">Performax</option>
+                                    <option value="Levis">Levis</option>
+                                    {% elif product.product_brand == "Allen Solly" %}
+                                    <option>-----Select Brand-----</option>
+                                    <option value="Superdry">Superdry</option>
+                                    <option value="Allen Solly" selected>Allen Solly</option>
+                                    <option value="Netplay">Netplay</option>
+                                    <option value="Performax">Performax</option>
+                                    <option value="Levis">Levis</option>
+                                    {% elif product.product_brand == "Netplay" %}
+                                    <option>-----Select Brand-----</option>
+                                    <option value="Superdry">Superdry</option>
+                                    <option value="Allen Solly">Allen Solly</option>
+                                    <option value="Netplay" selected>Netplay</option>
+                                    <option value="Performax">Performax</option>
+                                    <option value="Levis">Levis</option>
+                                    {% elif product.product_brand == "Performax" %}
+                                    <option>-----Select Brand-----</option>
+                                    <option value="Superdry">Superdry</option>
+                                    <option value="Allen Solly">Allen Solly</option>
+                                    <option value="Netplay">Netplay</option>
+                                    <option value="Performax" selected>Performax</option>
+                                    <option value="Levis">Levis</option>
+                                    {% elif product.product_brand == "Levis" %}
+                                    <option>-----Select Brand-----</option>
+                                    <option value="Superdry">Superdry</option>
+                                    <option value="Allen Solly">Allen Solly</option>
+                                    <option value="Netplay">Netplay</option>
+                                    <option value="Performax">Performax</option>
+                                    <option value="Levis" selected>Levis</option>
+                                    {% endif %}
+                                    </select>
+                                </div> 
+                                <br><br><br>
+                                <div class="col-lg-12">
+                                    <select name="product_size" class="form-control">
+                                    {% if product.product_size == 'S' %}
+                                    <option>-----Select Size-----</option>
+                                      <option value="S" selected>S</option>
+                                      <option value="M">M</option>
+                                      <option value="L">L</option>
+                                      <option value="XL">XL</option>
+                                    {% elif product.product_size == 'M' %}
+                                    <option>-----Select Size-----</option>
+                                      <option value="S">S</option>
+                                      <option value="M" selected>M</option>
+                                      <option value="L">L</option>
+                                      <option value="XL">XL</option>
+                                    {% elif product.product_size == 'L' %}
+                                    <option>-----Select Size-----</option>
+                                      <option value="S">S</option>
+                                      <option value="M">M</option>
+                                      <option value="L" selected>L</option>
+                                      <option value="XL">XL</option>
+                                    {% elif product.product_size == 'XL' %}
+                                    <option>-----Select Size-----</option>
+                                      <option value="S">S</option>
+                                      <option value="M">M</option>
+                                      <option value="L">L</option>
+                                      <option value="XL" selected>XL</option>
+                                    {% endif %}
+                                    </select>
+                                </div>     
+                                <br><br><br>                                                 
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Product Name" name="product_name" value="{{product.product_name}}">
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Product Price" name="product_price" value="{{product.product_price}}">
+                                </div>
+                                <div class="col-lg-12">
+                                    <img src="{{product.product_pic.url}}" height="200px" width="150px">
+                                </div>
+                                <div class="col-lg-12">
+                                    Product Pic:<input type="file" name="product_pic">
+                                </div>
+                                <button type="submit" class="site-btn" value="Update product">Update Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

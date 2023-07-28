@@ -1,0 +1,99 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    </head>
+	<body>
+		
+
+		
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							{% if carts %}
+                            <br><br><br><br>
+								<h3 class="title">My Orders</h3>
+							{% else %}
+                                <br><br>
+								<h3 class="title">No Items In Your Order</h3>
+							{% endif %}
+							
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										{% for i in carts %}
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<img src="{{i.product.product_pic.url}}" alt="" style="width:200px;height:200px;">
+												
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{i.product.product_category}}</p>
+												
+												<h3 class="product-name"><a href="#">{{i.product.product_name}}</a></h3>
+												
+												<h4 class="product-price">Price : {{i.product.product_price}} </h4>
+												
+												<form name="change_qty" method="post" action="{% url 'change-qty' %}">
+													{% csrf_token %}
+													<h4 class="product-price">Quantity :</h4> <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();" readonly>
+													<input type="hidden" name="cid" value="{{i.pk}}">
+												</form>
+
+												<h4 class="product-price">Total Price : {{i.total_price}} </h4>
+
+
+												{% if request.session.email %}
+												<div class="product-btns">
+													
+													
+													<a href="{% url 'product-details' pk=i.product.pk %}"><i class="fa fa-eye"></i><span class="tooltipp"></span></a>
+												</div>
+												{% else %}
+													<a href="{% url 'signin' %}"><input type="button" value="Login" class="btn btn-primary"></a>
+												{% endif %}
+											</div>
+											
+										</div>
+										<!-- /product -->
+										{% endfor %}
+										
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+						
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		
+	</body>
+</html>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+</head>
+
+<body>
+    <section class="contact spad">        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__text">
+                        <div class="section-title">
+                            <h2>Add Product</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12" >
+                    <div class="contact__form">
+                        {% if msg %}
+                        <b style="color: blue;">{{msg}}</b>
+                        {% endif %}
+                        <form action="{% url 'seller-add-product' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <select name="product_category" class="form-control">
+                                      <option>-----Select Category-----</option>
+                                      <option value="Round">Round</option>
+                                      <option value="Polo">Polo</option>
+                                      <option value="Full Sleeve">Full Sleeve</option>
+                                      <option value="Sports">Sports</option>
+                                    </select>
+                                </div>
+                                <br><br><br>
+                                <div class="col-lg-12">
+                                    <select name="product_brand" class="form-control">
+                                      <option>-----Select Brand-----</option>
+                                      <option value="Superdry">Superdry</option>
+                                      <option value="Allen Solly">Allen Solly</option>
+                                      <option value="Netplay">Netplay</option>
+                                      <option value="Performax">Performax</option>
+                                      <option value="Levis">Levis</option>
+                                    </select>
+                                </div> 
+                                <br><br><br>
+                                <div class="col-lg-12">
+                                    <select name="product_size" class="form-control">
+                                      <option>-----Select Size-----</option>
+                                      <option value="S">S</option>
+                                      <option value="M">M</option>
+                                      <option value="L">L</option>
+                                      <option value="XL">XL</option>
+                                    </select>
+                                </div>     
+                                <br><br><br>                                                 
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Product Name" name="product_name">
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Product Price" name="product_price">
+                                </div>
+                                <div class="col-lg-12">
+                                    Product Pic:<input type="file" name="product_pic">
+                                </div>
+                                <button type="submit" class="site-btn" value="add product">Add Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

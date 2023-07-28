@@ -1,0 +1,102 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+</head>
+
+<body>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Wishlist</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>Wishlist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        <div class="shop__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <li><a href="{% url 'shop' %}">All Tshirts</a></li>
+                                                    <li><a href="{% url 'shop' %}">Round Tshirt</a></li>
+                                                    <li><a href="{% url 'shop' %}">Polo Tshirt</a></li>
+                                                    <li><a href="{% url 'shop' %}">Full Sleeve Tshirt</a></li>
+                                                    <li><a href="{% url 'shop' %}">Sports Tshirt</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if msg %}
+                        <b style="color: blue;">{{msg}}</b>
+                        {% endif %}
+                        {% if wishlists %}
+                        {% for i in wishlists %}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{i.product.product_pic.url}}">
+                                </div>
+                                <div class="product__item__text">
+                                    <h6 style="color: blue;">{{i.product.product_brand}}</h6>
+                                    <h6>{{i.product.product_name}}</h6>
+                                    <a href="{% url 'product-details' pk=i.product.pk %}">+Product Details</a>
+                                    <h5>{{i.product.product_price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <h3 style="color: h4lack">No Products In Wishlist</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}
